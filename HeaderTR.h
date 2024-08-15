@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include<string>
 
 using namespace std;
@@ -7,11 +7,11 @@ using namespace std;
 struct TrieNode
 {
 	struct TrieNode* children[ALPHABET_SIZE];
-	// isEndOfWord - true, если ключ является концом слова
+	// isEndOfWord - true, СѓРєР°Р·Р°С‚РµР»СЊ РєРѕРЅС†Р° СЃР»РѕРІР°
 	bool isEndOfWord;
-	~TrieNode();                                                     // Деструктор структуры
-	TrieNode* getNewNode();                                          // Возвратить новый узел с нулевыми указателями на детей
-	void insert(TrieNode* root, string key);                         // Вставить ключ в дерево 
-	void findEveryWord(TrieNode* root, string* array, string& tip, int& index);  // Найти каждый суффикс, начиная с переданного узла
-	TrieNode* findChildren(TrieNode* root, string key);              // Найти узел 'сhildren' по строке
+	~TrieNode();                                                     // Р”РµСЃС‚СЂСѓРєС‚РѕСЂ СЃС‚СЂСѓРєС‚СѓСЂС‹
+	TrieNode* getNewNode();                                          // Р¤СѓРЅРєС†РёСЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё СѓР·Р»Р°
+	void insert(TrieNode* root, string key);                         // Р¤СѓРЅРєС†РёСЏ РІСЃС‚Р°РІРєРё РєР»СЋС‡Р° РІ РґРµСЂРµРІРѕ 
+	void findEveryWord(TrieNode* root, string* array, string& tip, int& index);  // Р¤СѓРЅРєС†РёСЏ РЅР°С…РѕРґРёС‚ РєР°Р¶РґС‹Р№ СЃСѓС„С„РёРєСЃ РІ РґРµСЂРµРІРµРё Р·Р°РЅРѕСЃРёС‚ РІ РјР°СЃСЃРёРІ 'array'
+	TrieNode* findChildren(TrieNode* root, string key);              // Р¤СѓРЅРєС†РёСЏ РЅР°С…РѕРґРёС‚ РІ СЃСѓС„С„РёРєСЃРЅРѕРј РґРµСЂРµРІРµ СѓР·РµР» "children" РїРѕ СЃС‚СЂРѕРєРµ
 };

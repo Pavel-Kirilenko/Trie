@@ -1,9 +1,9 @@
-#include<iostream>
+п»ї#include<iostream>
 #include<string>
 #include"HeaderTR.h"
 using namespace std;
 
-/* Деструктор структуры */
+/* Р”РµСЃС‚СЂСѓРєС‚РѕСЂ СЃС‚СЂСѓРєС‚СѓСЂС‹ */
 TrieNode::~TrieNode()
 {
     for (int i = 0; i < ALPHABET_SIZE; i++)
@@ -15,36 +15,36 @@ TrieNode::~TrieNode()
         }
     }
 }
-/* Функция инициализации узла */
-TrieNode* TrieNode::getNewNode()                // Возвратить новый узел с нулевыми указателями на детей
+/* Р¤СѓРЅРєС†РёСЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё СѓР·Р»Р° */
+TrieNode* TrieNode::getNewNode()                // Р’РѕР·РІСЂР°С‚РёС‚СЊ РЅРѕРІС‹Р№ СѓР·РµР» СЃ РЅСѓР»РµРІС‹РјРё СѓРєР°Р·Р°С‚РµР»СЏРјРё РЅР° РґРµС‚РµР№
 {
-    struct TrieNode* pNode = new TrieNode;      // Выделить память под новый узел
-    pNode->isEndOfWord = false;                 // Установить значение конца слова как false
-    for (int i = 0; i < ALPHABET_SIZE; i++)     // Инициализировать указателей на детей нолями
+    struct TrieNode* pNode = new TrieNode;      // Р’С‹РґРµР»РёС‚СЊ РїР°РјСЏС‚СЊ РїРѕРґ РЅРѕРІС‹Р№ СѓР·РµР»
+    pNode->isEndOfWord = false;                 // РЈСЃС‚Р°РЅРѕРІРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ РєРѕРЅС†Р° СЃР»РѕРІР° РєР°Рє false
+    for (int i = 0; i < ALPHABET_SIZE; i++)     // РРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°С‚СЊ СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° РґРµС‚РµР№ РЅРѕР»СЏРјРё
         pNode->children[i] = nullptr;
 
     return pNode;
 }
-/* Функция вставки ключа в дерево */
-void TrieNode::insert(TrieNode* root, string key) // Вставить ключ в дерево  
+/* Р¤СѓРЅРєС†РёСЏ РІСЃС‚Р°РІРєРё РєР»СЋС‡Р° РІ РґРµСЂРµРІРѕ */
+void TrieNode::insert(TrieNode* root, string key) // Р’СЃС‚Р°РІРёС‚СЊ РєР»СЋС‡ РІ РґРµСЂРµРІРѕ  
 {
-    bool wordExist = false;                      // Переменная, которая показывает, что вводимое слово уже есть в словаре
-    TrieNode* current = root;                    // Начать с корня дерева
+    bool wordExist = false;                      // РџРµСЂРµРјРµРЅРЅР°СЏ, РєРѕС‚РѕСЂР°СЏ РїРѕРєР°Р·С‹РІР°РµС‚, С‡С‚Рѕ РІРІРѕРґРёРјРѕРµ СЃР»РѕРІРѕ СѓР¶Рµ РµСЃС‚СЊ РІ СЃР»РѕРІР°СЂРµ
+    TrieNode* current = root;                    // РќР°С‡Р°С‚СЊ СЃ РєРѕСЂРЅСЏ РґРµСЂРµРІР°
     for (int i = 0; i < key.length(); i++)       
     {
-        int index = key[i] - 'a';                // Получить индекс текущего символа в алфавите
+        int index = key[i] - 'a';                // РџРѕР»СѓС‡РёС‚СЊ РёРЅРґРµРєСЃ С‚РµРєСѓС‰РµРіРѕ СЃРёРјРІРѕР»Р° РІ Р°Р»С„Р°РІРёС‚Рµ
 
-        if (!current->children[index])                // Если нет детей с данным индексом, то
+        if (!current->children[index])                // Р•СЃР»Рё РЅРµС‚ РґРµС‚РµР№ СЃ РґР°РЅРЅС‹Рј РёРЅРґРµРєСЃРѕРј, С‚Рѕ
         {
-            current->children[index] = getNewNode();  // Создать новый узел
+            current->children[index] = getNewNode();  // РЎРѕР·РґР°С‚СЊ РЅРѕРІС‹Р№ СѓР·РµР»
             wordExist = false;
         }
         else wordExist = true;
-        current = current->children[index];      // Перейти к детям
+        current = current->children[index];      // РџРµСЂРµР№С‚Рё Рє РґРµС‚СЏРј
     }
-    current->isEndOfWord = true;                 // Пометить конец слова
+    current->isEndOfWord = true;                 // РџРѕРјРµС‚РёС‚СЊ РєРѕРЅРµС† СЃР»РѕРІР°
 }
-/* Функция находит каждый суффикс в дереве, начиная с переданного узла "children" и заносит в массив 'array' */
+/* Р¤СѓРЅРєС†РёСЏ РЅР°С…РѕРґРёС‚ РєР°Р¶РґС‹Р№ СЃСѓС„С„РёРєСЃ РІ РґРµСЂРµРІРµ, РЅР°С‡РёРЅР°СЏ СЃ РїРµСЂРµРґР°РЅРЅРѕРіРѕ СѓР·Р»Р° "children" Рё Р·Р°РЅРѕСЃРёС‚ РІ РјР°СЃСЃРёРІ 'array' (СЂРµРєСѓСЂСЃРёРІРЅР°СЏ) */
 void TrieNode::findEveryWord(TrieNode* root, string* array, string& tip, int& index)
 {;
     if (root->isEndOfWord)
@@ -61,18 +61,18 @@ void TrieNode::findEveryWord(TrieNode* root, string* array, string& tip, int& in
         }
     }
     if (tip != "")
-    tip.erase(tip.size() - 1);  // удаление последнего символа при каждом выходе
-                                // из рекурсивно вызванной функции
+    tip.erase(tip.size() - 1);  // СѓРґР°Р»РµРЅРёРµ РїРѕСЃР»РµРґРЅРµРіРѕ СЃРёРјРІРѕР»Р° РїСЂРё РєР°Р¶РґРѕРј РІС‹С…РѕРґРµ
+                                // РёР· СЂРµРєСѓСЂСЃРёРІРЅРѕ РІС‹Р·РІР°РЅРЅРѕР№ С„СѓРЅРєС†РёРё
 }
-/* Функция находит в суффиксном дереве узел "children" по строке */
+/* Р¤СѓРЅРєС†РёСЏ РЅР°С…РѕРґРёС‚ РІ СЃСѓС„С„РёРєСЃРЅРѕРј РґРµСЂРµРІРµ СѓР·РµР» "children" РїРѕ СЃС‚СЂРѕРєРµ */
 TrieNode* TrieNode::findChildren(TrieNode* root, string key)
 {
     if (root == nullptr) return root;
     for (int i = 0; i < key.size(); i++)
     {
-        if (root->children[key[i] - 'a'])         // Если в текущем массиве 'children' есть узел с текущим символом строки 'key'
-            root = root->children[key[i] - 'a'];  // то переходим к этому узлу
-        else return nullptr;                      // иначе возварщаем nullptr
+        if (root->children[key[i] - 'a'])         // Р•СЃР»Рё РІ С‚РµРєСѓС‰РµРј РјР°СЃСЃРёРІРµ 'children' РµСЃС‚СЊ СѓР·РµР» СЃ С‚РµРєСѓС‰РёРј СЃРёРјРІРѕР»РѕРј СЃС‚СЂРѕРєРё 'key'
+            root = root->children[key[i] - 'a'];  // С‚Рѕ РїРµСЂРµС…РѕРґРёРј Рє СЌС‚РѕРјСѓ СѓР·Р»Сѓ
+        else return nullptr;                      // РёРЅР°С‡Рµ РІРѕР·РІР°СЂС‰Р°РµРј nullptr
     }
     return root;
 }
